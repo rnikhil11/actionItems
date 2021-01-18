@@ -1,0 +1,13 @@
+.rjsf {
+  margin: 10px;
+  justify-content: center;
+}
+div.row.array-item-list {
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+}
+div.array-item {
+  display: flex;
+  flex-direction: row;
+}
