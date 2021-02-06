@@ -22,7 +22,7 @@ const SelectUser = () => {
     );
     console.log(selectedUser);
     history.push({
-      pathname: "/editActions",
+      pathname: "/meetingNotes",
       state: {
         role: selectedUser.host ? "host" : "guest",
         username: selectedUser.username,
@@ -37,7 +37,7 @@ const SelectUser = () => {
         type: "number",
         title: "Select User",
         enum: participants.map((p) => p.id),
-        enumNames: participants.map((p) => p.username),
+        enumNames: participants.map((p) => p.username.split(".")[2]),
       },
     },
   };

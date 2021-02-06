@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { CSVLink } from "react-csv";
+import widgets from "./widgets";
 
 import Form from "@rjsf/core";
 import TableFieldTemplate from "./tableFieldTemplate";
@@ -17,6 +18,8 @@ const ActionsForm = (props) => {
       (err) => console.log(err)
     );
   }, []);
+  let { username, role, participants } = props;
+
   useEffect(() => {
     let p;
     const actionData = [];
@@ -31,8 +34,6 @@ const ActionsForm = (props) => {
     setFormData({ actions: actionData });
   }, [actions]);
 
-  const { username, role, participants } = props;
-
   const schema = {
     type: "object",
     properties: {
@@ -43,6 +44,7 @@ const ActionsForm = (props) => {
           properties: {
             username: {
               type: "string",
+              default: "",
             },
             actionItems: {
               type: "string",
@@ -63,6 +65,22 @@ const ActionsForm = (props) => {
             progress: {
               type: "number",
               default: 0,
+            },
+            priority: {
+              type: "string",
+              enum: ["Low", "Medium", "High"],
+              default: "Medium",
+            },
+            environment: {
+              type: "string",
+              enum: [
+                "Planning",
+                "Development",
+                "Staging",
+                "Test",
+                "Production",
+              ],
+              default: "Planning",
             },
             status: {
               type: "string",
@@ -88,7 +106,7 @@ const ActionsForm = (props) => {
     actions: {
       items: {
         username: {
-          // "ui:readonly": true,
+          "ui:widget": "user",
         },
         actionItems: {
           "ui:widget": "textarea",
@@ -102,6 +120,9 @@ const ActionsForm = (props) => {
         progress: {
           "ui:readonly": true,
         },
+        // priority: {
+        //   "ui:widget": "priority",
+        // },
       },
     },
   };
@@ -153,6 +174,7 @@ const ActionsForm = (props) => {
           formData,
           onChange,
           ArrayFieldTemplate: TableFieldTemplate,
+          widgets,
         }}
       />
       {/* <Link to="/users">Go Home</Link> */}

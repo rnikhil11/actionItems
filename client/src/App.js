@@ -11,6 +11,8 @@ import {
   EditActions,
   NotFound,
 } from "./paths";
+import CalendarView from "./paths/CalendarView";
+import MeetingNotes from "./paths/MeetingNotes";
 import SelectUser from "./paths/SelectUser";
 const App = () => {
   return (
@@ -25,7 +27,8 @@ const App = () => {
         <Route path="/viewData/:formId" component={ViewData}></Route>
         <Route path="/users" component={SelectUser}></Route>
         <Route path="/editActions" component={EditActions}></Route>
-        <Route component={NotFound} />
+        <Route path="/calendarView" component={CalendarView}></Route>
+        <Route component={MeetingNotes} />
       </Switch>
     </>
   );

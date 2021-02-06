@@ -25,7 +25,7 @@ const getCells = (props, columns, role, username) => {
 const TableFieldTemplate = (props) => {
   console.log(props);
   const { role, username } = props.schema.items;
-  const columns = [
+  let columns = [
     {
       dataField: "username",
       text: "Participant",
@@ -33,6 +33,7 @@ const TableFieldTemplate = (props) => {
     {
       dataField: "actionItems",
       text: "Action Items",
+      style: { width: "20%" },
     },
     {
       dataField: "startDate",
@@ -48,8 +49,13 @@ const TableFieldTemplate = (props) => {
       text: "Est. Completion Date",
     },
     { dataField: "progress", text: "% of Progress", style: { width: "10%" } },
+
+    { dataField: "priority", text: "Priority" },
+    { dataField: "environment", text: "Environment" },
+
     { dataField: "status", text: "Status" },
   ];
+  columns = columns.map((x) => ({ ...x, headerStyle: { color: "grey" } }));
 
   const keyField = "username";
   const data = getCells(props, columns, role, username);
@@ -57,7 +63,7 @@ const TableFieldTemplate = (props) => {
   return (
     <>
       {/* <AddButton onClick={props.onAddClick} /> */}
-      <BootstrapTable {...{ columns, data, keyField }} />
+      <BootstrapTable {...{ columns, data, keyField, bordered: false }} />
     </>
   );
 };
