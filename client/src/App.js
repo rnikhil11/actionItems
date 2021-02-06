@@ -8,7 +8,10 @@ import {
   Success,
   ChooseData,
   ViewData,
+  EditActions,
+  NotFound,
 } from "./paths";
+import SelectUser from "./paths/SelectUser";
 const App = () => {
   return (
     <>
@@ -20,6 +23,9 @@ const App = () => {
         <Route path="/success/:successId" component={Success}></Route>
         <Route path="/chooseData" component={ChooseData}></Route>
         <Route path="/viewData/:formId" component={ViewData}></Route>
+        <Route path="/users" component={SelectUser}></Route>
+        <Route path="/editActions" component={EditActions}></Route>
+        <Route component={NotFound} />
       </Switch>
     </>
   );
