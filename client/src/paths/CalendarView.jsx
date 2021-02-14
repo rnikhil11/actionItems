@@ -10,15 +10,22 @@ var CryptoJS = require("crypto-js");
 const CalendarView = (props) => {
   const [actionsList, setActionsList] = useState([]);
   const [actions, setActions] = useState([]);
+  console.log(actions);
   useEffect(() => {
-    if (props.meeting) {
-      setActions(props.actions);
-      console.log(props.actions);
-    } else {
-      axios.get("/actionItems").then(
+    const { meetingId } = props;
+    if (props.meetingActions) {
+      console.log("meeting actions");
+      axios.get("/getMeetingActions", { params: { meetingId } }).then(
         (resp) => {
           setActions(resp.data);
-          console.log(">>");
+          console.log(resp.data);
+        },
+        (err) => console.log(err)
+      );
+    } else {
+      axios.get("/getUserActions").then(
+        (resp) => {
+          setActions(resp.data);
         },
         (err) => console.log(err)
       );

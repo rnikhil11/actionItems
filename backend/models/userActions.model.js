@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
-const ActionsSchema = new mongoose.Schema(
+const UserActionsSchema = new mongoose.Schema(
   {
-    username: String,
+    username: { type: String, unique: true },
     actionItems: String,
     startDate: String,
     effortInDays: Number,
@@ -12,7 +12,6 @@ const ActionsSchema = new mongoose.Schema(
     progress: Number,
     status: { type: String, default: "Not started" },
     environment: String,
-    meetingId: String,
     is_active: { type: Boolean, default: false },
     is_verified: { type: Boolean, default: false },
     is_deleted: { type: Boolean, default: false },
@@ -22,4 +21,4 @@ const ActionsSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model("Actions", ActionsSchema);
+module.exports = mongoose.model("UserActions", UserActionsSchema);

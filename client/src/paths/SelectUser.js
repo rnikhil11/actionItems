@@ -1,18 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { nanoid } from "nanoid";
+
 import axios from "axios";
 import Form from "@rjsf/core";
 
 const SelectUser = () => {
   const history = useHistory();
 
-  const [participants, setParticipants] = useState([]);
-  useEffect(() => {
-    axios.get("/participants").then(
-      (resp) => setParticipants(resp.data),
-      (err) => console.log(err)
-    );
-  }, []);
+  const participants = useSelector((state) => state?.meeting?.participants);
 
   console.log(participants);
   const onSubmit = (formProps) => {
@@ -25,8 +22,9 @@ const SelectUser = () => {
       pathname: "/meetingNotes",
       state: {
         role: selectedUser.host ? "host" : "guest",
-        username: selectedUser.username,
-        participants: participants,
+        username: selectedUser.name,
+        participants: participants.map((x) => ({ ...x, username: x.name })),
+        meetingId: nanoid(),
       },
     });
   };
@@ -35,14 +33,19 @@ const SelectUser = () => {
     properties: {
       user: {
         type: "number",
-        title: "Select User",
-        enum: participants.map((p) => p.id),
-        enumNames: participants.map((p) => p.username.split(".")[2]),
+        title: "Select Participant",
+        enum: participants?.map((p) => p.id),
+        // enumNames: participants?.map((p) => p.username.split(".")[2]),
+        enumNames: participants?.map((p) => p.name),
       },
     },
   };
   const uiSchema = {};
-  return <Form schema={schema} uiSchema={uiSchema} onSubmit={onSubmit} />;
+  return (
+    <div class="container">
+      <Form schema={schema} uiSchema={uiSchema} onSubmit={onSubmit} />
+    </div>
+  );
 };
 
 export default SelectUser;

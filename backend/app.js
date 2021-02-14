@@ -23,16 +23,16 @@ mongoose
   });
 
 var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
-var homeRouter = require("./routes/home");
-var newFormRouter = require("./routes/newForm");
-var chooseFormRouter = require("./routes/chooseForm");
-var fillFormRouter = require("./routes/fillForm");
-var completeFormRouter = require("./routes/completeForm");
-var viewDataRouter = require("./routes/viewData");
+
 var participantsRouter = require("./routes/participants");
 var submitActionsRouter = require("./routes/submitActions");
-var actionItemsRouter = require("./routes/actionItems");
+var submitUserActionsRouter = require("./routes/submitUserActions");
+var addMeetingRouter = require("./routes/addMeeting");
+var getMeetingsRouter = require("./routes/getMeetings");
+var getMeetingActionsRouter = require("./routes/getMeetingActions");
+var getUserActionsRouter = require("./routes/getUserActions");
+var getUsersRouter = require("./routes/getUsers");
+var setHostsRouter = require("./routes/setHosts");
 var app = express();
 
 // view engine setup
@@ -46,16 +46,19 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
-app.use("/users", usersRouter);
-app.use("/home", homeRouter);
-app.use("/newForm", newFormRouter);
-app.use("/chooseForm", chooseFormRouter);
-app.use("/fillForm", fillFormRouter);
-app.use("/completeForm", completeFormRouter);
-app.use("/viewData", viewDataRouter);
+
 app.use("/participants", participantsRouter);
+app.use("/addMeeting", addMeetingRouter);
+app.use("/getUserActions", getUserActionsRouter);
+
 app.use("/submitActions", submitActionsRouter);
-app.use("/actionItems", actionItemsRouter);
+app.use("/submitUserActions", submitUserActionsRouter);
+
+app.use("/getMeetings", getMeetingsRouter);
+app.use("/getMeetingActions", getMeetingActionsRouter);
+
+app.use("/getUsers", getUsersRouter);
+app.use("/setHosts", setHostsRouter);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));

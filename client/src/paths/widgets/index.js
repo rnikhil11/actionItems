@@ -1,3 +1,4 @@
 import User from "./user";
 import Priority from "./priority";
-export default { user: User, priority: Priority };
+import StartDateWidget from "./startDate";
+export default { user: User, priority: Priority, startDate: StartDateWidget };

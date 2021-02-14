@@ -71,6 +71,11 @@ class CellComponent extends Component {
         .businessAdd(formData["effortInDays"])
         .format("YYYY-MM-DD");
     }
+
+    // if (name === "status" && formData[name] == "Completed") {
+    //   const colName = "actualCompletionDate";
+    //   formData[colName] = moment().format("YYYY-MM-DD");
+    // }
     if (name == "progress") {
       formData[name] = Math.min(
         _round(
@@ -90,12 +95,18 @@ class CellComponent extends Component {
         "startDate",
         "effortInDays",
         "status",
+        "priority",
+        "environment",
       ].includes(name)
     ) {
       uiReadonly =
         this.props.role === "guest" &&
         this.props.username !== formData["username"];
     }
+    if (!formData["username"]) {
+      uiReadonly = false;
+    }
+
     return (
       <SchemaField
         key={name}
