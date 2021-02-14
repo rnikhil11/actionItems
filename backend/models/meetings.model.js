@@ -1,10 +1,9 @@
 const mongoose = require("mongoose");
 
-const FormSchema = new mongoose.Schema(
+const MeetingsSchema = new mongoose.Schema(
   {
-    title: String,
-    description: String,
-    content: Array,
+    meetingId: { type: String, unique: true },
+    name: String,
     is_active: { type: Boolean, default: false },
     is_verified: { type: Boolean, default: false },
     is_deleted: { type: Boolean, default: false },
@@ -14,4 +13,4 @@ const FormSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model("Form", FormSchema);
+module.exports = mongoose.model("Meetings", MeetingsSchema);

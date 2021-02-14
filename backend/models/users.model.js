@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 
-const FormDataSchema = new mongoose.Schema(
+const UsersSchema = new mongoose.Schema(
   {
-    data: Array,
-    formId: String,
+    username: { type: String, unique: true },
+    host: { type: Boolean, default: false },
     is_active: { type: Boolean, default: false },
     is_verified: { type: Boolean, default: false },
     is_deleted: { type: Boolean, default: false },
@@ -13,4 +13,4 @@ const FormDataSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model("FormData", FormDataSchema);
+module.exports = mongoose.model("Users", UsersSchema);

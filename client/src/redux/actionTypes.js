@@ -1,0 +1,2 @@
+export const SET_PARTICIPANTS = "SET_PARTICIPANTS";
+export const SET_AS_HOST = "SET_AS_HOST";
